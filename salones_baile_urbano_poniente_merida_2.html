@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ing. Herrera · Salones de Baile Urbano · Zona Poniente Mérida</title>
+<style>
+  :root{
+    --bg:#0d0d12;
+    --card:#17171f;
+    --card2:#1e1e29;
+    --accent:#ff3d68;
+    --accent2:#00d4b5;
+    --electric:#1f4dff;
+    --text:#f2f2f5;
+    --muted:#9a9aa8;
+    --border:#2a2a36;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background:linear-gradient(160deg,#0d0d12 0%,#15151d 100%);
+    color:var(--text);
+    padding:0 0 60px;
+  }
+  header{
+    padding:48px 24px 32px;
+    text-align:center;
+    background:radial-gradient(circle at top, rgba(31,77,255,0.22), transparent 60%);
+    border-bottom:1px solid var(--border);
+  }
+  .dedication{
+    display:inline-block;
+    background:rgba(31,77,255,0.12);
+    border:1px solid rgba(31,77,255,0.45);
+    color:var(--electric);
+    font-size:0.78rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    padding:5px 16px;
+    border-radius:20px;
+    margin-bottom:16px;
+    font-weight:600;
+  }
+  header h1{
+    margin:0 0 8px;
+    font-size:2.2rem;
+    letter-spacing:0.5px;
+  }
+  header h1 span{ color:var(--electric); }
+  header p{
+    color:var(--muted);
+    max-width:640px;
+    margin:0 auto;
+    font-size:0.98rem;
+  }
+  .wellbeing-note{
+    max-width:680px;
+    margin:20px auto 0;
+    padding:14px 20px;
+    background:linear-gradient(90deg, rgba(31,77,255,0.10), rgba(0,212,181,0.08));
+    border:1px solid rgba(31,77,255,0.3);
+    border-radius:14px;
+    font-size:0.92rem;
+    color:#dcdfff;
+    line-height:1.5;
+  }
+  .wellbeing-note b{ color:var(--electric); }
+  .zona-tags{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:16px;
+  }
+  .zona-tags span{
+    background:var(--card2);
+    border:1px solid var(--border);
+    color:var(--electric);
+    padding:5px 14px;
+    border-radius:20px;
+    font-size:0.8rem;
+  }
+  main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:32px 20px 0;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+    gap:22px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-left:3px solid var(--electric);
+    border-radius:16px;
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;
+    height:3px;
+    background:linear-gradient(90deg,var(--electric),var(--accent2));
+  }
+  .card h2{
+    margin:0;
+    font-size:1.25rem;
+  }
+  .rating{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.9rem;
+    color:var(--muted);
+  }
+  .rating b{ color:#ffc94d; }
+  .info-row{
+    font-size:0.88rem;
+    color:var(--muted);
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+  }
+  .info-row .icon{ flex-shrink:0; }
+  .info-row a{ color:var(--text); text-decoration:none; border-bottom:1px dotted var(--muted); }
+  .info-row a:hover{ color:var(--accent2); }
+  .reviews{
+    background:var(--card2);
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:0.82rem;
+    color:#c9c9d4;
+    font-style:italic;
+    line-height:1.4;
+  }
+  .reviews strong{ color:var(--accent2); font-style:normal; display:block; margin-bottom:4px; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.5px;}
+  .tags{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+  }
+  .tags span{
+    background:rgba(255,61,104,0.12);
+    color:var(--accent);
+    font-size:0.72rem;
+    padding:3px 9px;
+    border-radius:12px;
+    border:1px solid rgba(255,61,104,0.35);
+  }
+  .btn-row{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:auto;
+    padding-top:8px;
+  }
+  .btn{
+    flex:1;
+    text-align:center;
+    padding:9px 10px;
+    border-radius:8px;
+    font-size:0.8rem;
+    text-decoration:none;
+    font-weight:600;
+    transition:opacity .15s;
+    min-width:90px;
+  }
+  .btn:hover{ opacity:0.85; }
+  .btn-maps{ background:var(--accent2); color:#04211d; }
+  .btn-call{ background:var(--accent); color:#fff; }
+  .btn-ig{ background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4); color:#fff; }
+  .btn-fb{ background:#1877f2; color:#fff; }
+  .btn-video{ background:#333; color:#fff; border:1px solid var(--border); }
+  .btn-web{ background:#333; color:#fff; border:1px solid var(--border); }
+  .price{
+    font-size:0.82rem;
+    color:var(--accent2);
+    background:rgba(0,212,181,0.08);
+    border:1px solid rgba(0,212,181,0.25);
+    border-radius:8px;
+    padding:6px 10px;
+  }
+  .note{
+    font-size:0.78rem;
+    color:#dcdfff;
+    text-align:center;
+    max-width:800px;
+    margin:36px auto 0;
+    padding:14px 24px;
+    line-height:1.55;
+    background:linear-gradient(90deg, rgba(31,77,255,0.10), rgba(0,212,181,0.08));
+    border:1px solid rgba(31,77,255,0.3);
+    border-radius:14px;
+  }
+  .note strong{ color:var(--electric); }
+  .badge-no-social{
+    font-size:0.72rem;
+    color:var(--muted);
+    font-style:italic;
+  }
+  .distance{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:0.78rem;
+    color:var(--electric);
+    background:rgba(31,77,255,0.10);
+    border:1px solid rgba(31,77,255,0.35);
+    padding:3px 10px;
+    border-radius:10px;
+    width:fit-content;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="dedication">✨ Para la Ing. Herrera</span>
+  <h1>Salones de <span>Baile Urbano</span> · Zona Poniente Mérida</h1>
+  <p>Estudios de danza urbana, hip hop, twerk y afines cerca de Caucel, Real Montejo (Fco. de Montejo) y Dzityá. Toda la info de contacto, ubicación, calificación y opiniones de Google Maps, centralizada en un solo lugar para que solo tengas que elegir y agendar tu primera clase.</p>
+  <div class="zona-tags">
+    <span>📍 Caucel</span>
+    <span>📍 Real Montejo</span>
+    <span>📍 Dzityá</span>
+    <span>📍 Chuburná / Poniente</span>
+  </div>
+  <div class="wellbeing-note">
+    Más allá de lo divertido que es aprender coreografías nuevas, el baile es de los ejercicios más completos que existen: mejora la condición cardiovascular, la coordinación y la postura, y libera endorfinas que ayudan a bajar el estrés. Ojalá este espacio sea el primer paso hacia una rutina que le haga bien tanto a tu cuerpo como a tu espíritu. 💙
+  </div>
+</header>
+
+<main>
+
+  <!-- 1 -->
+  <div class="card">
+    <h2>Alma Twerk &amp; Fitness</h2>
+    <div class="rating">⭐ <b>5.0</b> (13 opiniones en Google)</div>
+    <div class="tags"><span>Twerk</span><span>Baile urbano</span><span>Zona: Caucel</span></div>
+    <div class="info-row"><span class="icon">📍</span><span>C. 31 78a, Caucel, 97314 Mérida, Yuc.</span></div>
+    <div class="distance">🚗 ~5.8 km desde Real Montejo</div>
+    <div class="info-row"><span class="icon">📞</span><a href="tel:+529993570429">+52 999 357 0429</a></div>
+    <div class="info-row"><span class="icon">🕒</span><span>Lun–Sáb 7:17 am–10:09 pm · Dom cerrado</span></div>
+    <div class="reviews">
+      <strong>Opiniones destacadas</strong>
+      "Un espacio para sentirte segura y libre; los maestros son pacientes y te acompañan en cada paso." · "La academia transmite disciplina, calidez y compromiso, con Alma siempre atenta a las alumnas." · Clases de twerk muy dinámicas y motivadoras.
+    </div>
+    <div class="price">💰 Precio no publicado — se recomienda cotizar directo por WhatsApp/Instagram.</div>
+    <div class="btn-row">
+      <a class="btn btn-maps" target="_blank" href="https://www.google.com/maps/place/?q=place_id:ChIJjU35KABzVo8RuB-5Dqv3yaI">Ver en Maps</a>
+      <a class="btn btn-call" href="tel:+529993570429">Llamar</a>
+      <a class="btn btn-ig" target="_blank" href="https://www.instagram.com/alma_twerkfitness/">Instagram</a>
+      <a class="btn btn-fb" target="_blank" href="https://www.facebook.com/p/Alma-Twerk-Fitness-61565562276811/">Facebook</a>
+      <a class="btn btn-video" target="_blank" href="https://www.instagram.com/p/DQ7J2fIEfrp/">Ver video</a>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <h2>Urban Complex</h2>
+    <div class="rating">⭐ <b>4.9</b> (19 opiniones en Google)</div>
+    <div class="tags"><span>Hip Hop</span><span>Danza urbana</span><span>Zona: Real Montejo</span></div>
+    <div class="info-row"><span class="icon">📍</span><span>C. 55D 296, Francisco de Montejo, 97203 Mérida, Yuc.</span></div>
+    <div class="distance">🚗 Está en Real Montejo (~0 km)</div>
+    <div class="info-row"><span class="icon">📞</span><a href="tel:+529993153168">+52 999 315 3168</a></div>
+    <div class="info-row"><span class="icon">🕒</span><span>Lun–Vie 4:30–9:30 pm · Sáb–Dom cerrado</span></div>
+    <div class="reviews">
+      <strong>Opiniones destacadas</strong>
+      "Ambiente fantástico para los niños, clases muy completas con maestros calificados y mucha pasión por el baile." · Encanta la clase de Kids Hip Hop, desarrolla coordinación y disciplina. · "La mejor escuela de baile, altamente recomendada."
+    </div>
+    <div class="price">💰 Precio no publicado — el perfil de Instagram indica "Estudio de danza urbana" en Fco. de Montejo; cotizar directo.</div>
+    <div class="btn-row">
+      <a class="btn btn-maps" target="_blank" href="https://www.google.com/maps/place/?q=place_id:ChIJzddJ5X51Vo8RHvtVPYJgRYg">Ver en Maps</a>
+      <a class="btn btn-call" href="tel:+529993153168">Llamar</a>
+      <a class="btn btn-ig" target="_blank" href="https://www.instagram.com/urban_complexx/">Instagram</a>
+      <a class="btn btn-fb" target="_blank" href="https://www.facebook.com/p/Urban-Complex-mx-100070901103895/">Facebook</a>
+      <a class="btn btn-video" target="_blank" href="https://www.instagram.com/p/DOtyc6FCYGO/">Ver video</a>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <h2>Zense Fitness &amp; Dance (Fco. de Montejo)</h2>
+    <div class="rating">⭐ <b>5.0</b> (35 opiniones en Google)</div>
+    <div class="tags"><span>Twerk</span><span>Fit Dance</span><span>Zona: Real Montejo</span></div>
+    <div class="info-row"><span class="icon">📍</span><span>Calle 53 e/58 y 69, Francisco de Montejo, 97000 Mérida, Yuc.</span></div>
+    <div class="distance">🚗 ~0.8 km desde Real Montejo</div>
+    <div class="info-row"><span class="icon">📞</span><a href="tel:+529997488767">+52 999 748 8767</a></div>
+    <div class="info-row"><span class="icon">🕒</span><span>Lun–Vie 5:00–10:00 pm · Sáb–Dom cerrado</span></div>
+    <div class="reviews">
+      <strong>Opiniones destacadas</strong>
+      "Primer estudio de danza enfocado en adultos; rompen estereotipos con maestros altamente calificados." · Clases de ballet, fit work y twerk, ambiente de respeto y paciencia. · "Precios excelentes, salones con aire acondicionado y ventiladores."
+    </div>
+    <div class="price">💰 Reseñas mencionan "precios accesibles / excelentes precios" sin monto exacto — confirmar por teléfono.</div>
+    <div class="btn-row">
+      <a class="btn btn-maps" target="_blank" href="https://www.google.com/maps/place/?q=place_id:ChIJ9emgyZN1Vo8R5zz64oZD3AI">Ver en Maps</a>
+      <a class="btn btn-call" href="tel:+529997488767">Llamar</a>
+      <a class="btn btn-ig" target="_blank" href="https://www.instagram.com/zensefit/">Instagram</a>
+      <a class="btn btn-fb" target="_blank" href="https://www.facebook.com/zensefitnessanddance/">Facebook</a>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <h2>Danzaré! Centro Integral de la Danza</h2>
+    <div class="rating">⭐ <b>4.9</b> (14 opiniones en Google)</div>
+    <div class="tags"><span>Hip-Hop</span><span>Danza Aérea</span><span>Zona: Caucel</span></div>
+    <div class="info-row"><span class="icon">📍</span><span>Calle 62 #681, x 43 y 45, Pedregales de Cd. Caucel, 97300 Mérida, Yuc.</span></div>
+    <div class="distance">🚗 ~5.3 km desde Real Montejo</div>
+    <div class="info-row"><span class="icon">📞</span><a href="tel:+529991544474">+52 999 154 4474</a></div>
+    <div class="info-row"><span class="icon">🕒</span><span>Lun 16:30–21:15 · Mar 16:00–21:15 · Mié 16:30–21:15 · Jue 16:00–22:30 · Vie 16:00–20:45 · Sáb 11:00–13:00</span></div>
+    <div class="reviews">
+      <strong>Opiniones destacadas</strong>
+      "Excelente academia, maestros súper capacitados y con mucha calidad humana." · Ofrecen Ballet, Jazz, Gimnasia, Danza Contemporánea, Danza Aérea y Hip-Hop desde los 3 años.
+    </div>
+    <div class="price">💰 No especificado en Maps; su sitio ofrece clase muestra gratis.</div>
+    <div class="btn-row">
+      <a class="btn btn-maps" target="_blank" href="https://www.google.com/maps/place/?q=place_id:ChIJwbRXn1ULVo8Rj_NUu6gdjDU">Ver en Maps</a>
+      <a class="btn btn-call" href="tel:+529991544474">Llamar</a>
+      <a class="btn btn-fb" target="_blank" href="https://www.facebook.com/DanzareCentroIntegraldeDanza/">Facebook</a>
+      <a class="btn btn-web" target="_blank" href="http://www.academiadanzare.com.mx/">Sitio web</a>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <h2>Touré Danza</h2>
+    <div class="rating">⭐ <b>5.0</b> (15 opiniones en Google)</div>
+    <div class="tags"><span>Danza urbana</span><span>Zona: Caucel</span></div>
+    <div class="info-row"><span class="icon">📍</span><span>Calle 39-A 646, Cd. Caucel, 97314 Mérida, Yuc.</span></div>
+    <div class="distance">🚗 ~5.4 km desde Real Montejo</div>
+    <div class="info-row"><span class="icon">📞</span><a href="tel:+529992172479">+52 999 217 2479</a></div>
+    <div class="reviews">
+      <strong>Opiniones destacadas</strong>
+      "Excelente academia; ambiente agradable, alumnos disciplinados y maestros muy calificados." · "Precios accesibles" y buenos protocolos sanitarios en el regreso a clases presenciales.
+    </div>
+    <div class="price">💰 Reseñas mencionan "precios accesibles" sin monto exacto.</div>
+    <div class="badge-no-social">No se localizaron redes sociales activas verificables — se recomienda llamar directo.</div>
+    <div class="btn-row">
+      <a class="btn btn-maps" target="_blank" href="https://www.google.com/maps/place/?q=place_id:ChIJPbNhV6h0Vo8RV8OZYCLw-lI">Ver en Maps</a>
+      <a class="btn btn-call" href="tel:+529992172479">Llamar</a>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <h2>Estudio Danzart Mérida (Fco. de Montejo)</h2>
+    <div class="rating">⭐ <b>4.6</b> (14 opiniones en Google)</div>
+    <div class="tags"><span>Hip-Hop</span><span>Zona: Real Montejo</span></div>
+    <div class="info-row"><span class="icon">📍</span><span>C. 47 272, por 46 y 48, Francisco de Montejo, 97203 Mérida, Yuc.</span></div>
+    <div class="distance">🚗 ~1.2 km desde Real Montejo</div>
+    <div class="info-row"><span class="icon">📞</span><a href="tel:+529991951339">+52 999 195 1339</a></div>
+    <div class="info-row"><span class="icon">🕒</span><span>Lun–Vie 4:00–9:00 pm · Sáb 9:00 am–12:00 pm</span></div>
+    <div class="reviews">
+      <strong>Opiniones destacadas</strong>
+      "Buen lugar, buen servicio" y "excelentes maestros" según varias reseñas. Una reseña señala una mala experiencia puntual en una clase de hip-hop por falta de bienvenida al probar clase — vale la pena preguntar por una clase de prueba guiada.
+    </div>
+    <div class="price">💰 No especificado; consultar clase de prueba al llamar.</div>
+    <div class="btn-row">
+      <a class="btn btn-maps" target="_blank" href="https://www.google.com/maps/place/?q=place_id:ChIJAR_skzd0Vo8RtIKgv8cMrfA">Ver en Maps</a>
+      <a class="btn btn-call" href="tel:+529991951339">Llamar</a>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <h2>Urban Oasis. Hip Hop &amp; Flow</h2>
+    <div class="rating">⭐ <b>5.0</b> (1 opinión en Google — estudio nuevo/pequeño)</div>
+    <div class="tags"><span>Hip Hop</span><span>Flow</span><span>Zona: El Prado / cerca Montejo</span></div>
+    <div class="info-row"><span class="icon">📍</span><span>C. 13 277, El Prado Chuburná, 97203 Mérida, Yuc.</span></div>
+    <div class="distance">🚗 ~0.8 km desde Real Montejo</div>
+    <div class="info-row"><span class="icon">📞</span><a href="tel:+529993537333">+52 999 353 7333</a></div>
+    <div class="reviews">
+      <strong>Opinión destacada</strong>
+      "El profesor JP transmite pasión genuina por la danza urbana."
+    </div>
+    <div class="price">💰 No especificado; al ser un estudio pequeño y especializado, conviene preguntar precio de clase suelta.</div>
+    <div class="badge-no-social">No se localizaron redes sociales activas verificables.</div>
+    <div class="btn-row">
+      <a class="btn btn-maps" target="_blank" href="https://www.google.com/maps/place/?q=place_id:ChIJtW2JgdJ1Vo8Rs6-KQHQy6sw">Ver en Maps</a>
+      <a class="btn btn-call" href="tel:+529993537333">Llamar</a>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <h2>We Dance.mid</h2>
+    <div class="rating">⭐ <b>5.0</b> (11 opiniones en Google)</div>
+    <div class="tags"><span>Multi-disciplina</span><span>Zona: Real Montejo</span></div>
+    <div class="info-row"><span class="icon">📍</span><span>C. 61 323-X, entre 52 y 54, Francisco de Montejo, 97203 Mérida, Yuc.</span></div>
+    <div class="distance">🚗 ~0.3 km desde Real Montejo</div>
+    <div class="info-row"><span class="icon">📞</span><a href="tel:+529991980383">+52 999 198 0383</a></div>
+    <div class="info-row"><span class="icon">🕒</span><span>Lun–Jue 8:00 am–9:30 pm · Vie 8:00 am–7:30 pm · Sáb 8:00 am–1:30 pm</span></div>
+    <div class="reviews">
+      <strong>Opiniones destacadas</strong>
+      "Instalaciones muy lindas, buen ambiente desde que llegas, clases variadas para todas las edades." · Espacio seguro con muchas actividades para niños y adultos.
+    </div>
+    <div class="price">💰 No especificado.</div>
+    <div class="btn-row">
+      <a class="btn btn-maps" target="_blank" href="https://www.google.com/maps/place/?q=place_id:ChIJ3RXPJjJRSEgRjBhN8N6efBw">Ver en Maps</a>
+      <a class="btn btn-call" href="tel:+529991980383">Llamar</a>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <h2>Phantom Dance MX</h2>
+    <div class="rating">⭐ <b>4.9</b> (10 opiniones en Google)</div>
+    <div class="tags"><span>Danza urbana</span><span>Show dance</span><span>Zona: Gonzalo Guerrero (cerca Real Montejo/Dzityá)</span></div>
+    <div class="info-row"><span class="icon">📍</span><span>C. 3c 391, Gonzalo Guerrero, 97127 Mérida, Yuc.</span></div>
+    <div class="distance">🚗 ~2.5 km desde Real Montejo</div>
+    <div class="info-row"><span class="icon">📞</span><a href="tel:+525611775950">+52 56 1177 5950</a></div>
+    <div class="info-row"><span class="icon">🕒</span><span>Lun 7–10 pm · Mar 6:30–10 pm · Mié 7–10 pm · Jue 9 am–5 pm y 7–10 pm · Vie 7–10 pm · Sáb cerrado · Dom 9 am–2 pm</span></div>
+    <div class="reviews">
+      <strong>Opiniones destacadas</strong>
+      "Definitivamente la mejor opción para formarte como bailarín de show; empecé desde cero y he crecido gracias a los maestros y talleres." · Gran lugar para entrenar danza urbana, con instructores experimentados y una comunidad relajada y solidaria. · Espacio seguro y de alto nivel para danza urbana, con maestros respetuosos y comprometidos con sus alumnos.
+    </div>
+    <div class="price">💰 No especificado; su bio de Instagram menciona "FlowThaFest" (evento propio) — cotizar directo por IG/WhatsApp.</div>
+    <div class="btn-row">
+      <a class="btn btn-maps" target="_blank" href="https://www.google.com/maps/place/?q=place_id:ChIJD9tiFSFzVo8R9ipwKKBGRJM">Ver en Maps</a>
+      <a class="btn btn-call" href="tel:+525611775950">Llamar</a>
+      <a class="btn btn-ig" target="_blank" href="https://www.instagram.com/phantomdance_mx/">Instagram</a>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <h2>DNZ Studio Mérida</h2>
+    <div class="rating">⭐ <b>5.0</b> (2 opiniones en Google — sucursal nueva)</div>
+    <div class="tags"><span>Dance &amp; Workout</span><span>Zona: Monterreal (norte, cerca Real Montejo/Dzityá)</span></div>
+    <div class="info-row"><span class="icon">📍</span><span>C. 37 215, Local 01, Monterreal, 97133 Mérida, Yuc.</span></div>
+    <div class="distance">🚗 ~5.4 km desde Real Montejo</div>
+    <div class="info-row"><span class="icon">📞</span><span>No publicado en Maps — contactar por Instagram/WhatsApp</span></div>
+    <div class="info-row"><span class="icon">🕒</span><span>Lun–Jue 7:10–11:00 am y 5:10–9:00 pm · Vie–Sáb 7:10–11:00 am · Dom cerrado</span></div>
+    <div class="reviews">
+      <strong>Opiniones destacadas</strong>
+      "El mejor lugar para bailar, entrenar y ejercitarte con tu música favorita." · Concepto de Dance &amp; Workout con clases dinámicas (DNZ Workout, Beginners, Step by Step, Body Workout) para todos los niveles.
+    </div>
+    <div class="price">💰 No especificado; aceptan membresías FITPASS, TOTALPASS y Wellhub.</div>
+    <div class="btn-row">
+      <a class="btn btn-maps" target="_blank" href="https://www.google.com/maps/place/?q=place_id:ChIJZRasAAB3Vo8RuXP2JUIDCoY">Ver en Maps</a>
+      <a class="btn btn-ig" target="_blank" href="https://www.instagram.com/dnzstudio.merida/">Instagram</a>
+      <a class="btn btn-fb" target="_blank" href="https://www.facebook.com/p/DNZ-Studio-M%C3%A9rida-61577917983632/">Facebook</a>
+      <a class="btn btn-web" target="_blank" href="https://merida.dnzworkout.com/">Sitio web</a>
+    </div>
+  </div>
+
+</main>
+
+<p class="note">
+  Datos recopilados de Google Maps (calificaciones, reseñas, horarios y teléfonos) y de perfiles públicos de Instagram/Facebook, julio 2026. Las distancias marcadas con 🚗 son en línea recta aproximada desde Real Montejo (Francisco de Montejo) — el trayecto real en auto puede ser un poco mayor según la ruta. Los precios exactos casi ninguna academia los publica en Maps ni en redes — la práctica común en Mérida es cotizar directo por WhatsApp o llamada, y suelen ofrecer una clase de prueba gratuita o de bajo costo. Se priorizaron estudios con enfoque explícito en baile urbano / hip hop / twerk dentro del radio Caucel–Real Montejo–Dzityá; se añadieron opciones cercanas cuando la oferta específica de "urbano" era limitada en la zona exacta. <strong>Phantom Dance MX</strong> y <strong>DNZ Studio Mérida</strong> están en Gonzalo Guerrero y Monterreal respectivamente, pero se incluyen por su fuerte enfoque en danza urbana / dance-workout.
+</p>
+
+</body>
+</html>
