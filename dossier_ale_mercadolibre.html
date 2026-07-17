@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expediente confidencial · Dirección de Operaciones, Mercado Libre</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --ink:#12203A;
+    --slate:#2E3D55;
+    --slate-soft:#5A6B85;
+    --paper:#ECEAE4;
+    --paper-2:#E2DFD6;
+    --line: rgba(18,32,58,0.16);
+    --brass:#A9823F;
+    --brass-soft: rgba(169,130,63,0.14);
+    --ml-yellow:#FFE600;
+    --good:#3F6C4E;
+    --warn:#9C4A2E;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: var(--paper);
+    background-image:
+      radial-gradient(ellipse at top left, rgba(18,32,58,0.03), transparent 60%);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .sheet{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ---------- Header / dossier cover ---------- */
+  .cover{
+    position:relative;
+    padding: 46px 0 30px;
+    border-bottom: 3px solid var(--ink);
+  }
+  .cover-eyebrow{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    font-family: var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color: var(--slate-soft);
+    margin-bottom: 26px;
+  }
+  .stamp{
+    font-family: var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:0.12em;
+    color: var(--warn);
+    border: 1.5px solid var(--warn);
+    padding: 5px 10px;
+    border-radius: 2px;
+    transform: rotate(3deg);
+    white-space:nowrap;
+  }
+  .cover h1{
+    font-family: var(--font-display);
+    font-optical-sizing:auto;
+    font-weight:500;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height:1.08;
+    margin: 0 0 14px;
+    letter-spacing:-0.01em;
+  }
+  .cover h1 em{
+    font-style:italic;
+    color: var(--brass);
+  }
+  .cover-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 10px 28px;
+    font-size:13.5px;
+    color: var(--slate);
+    margin-top: 18px;
+  }
+  .cover-meta div span{
+    display:block;
+    font-family: var(--font-mono);
+    font-size:10px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color: var(--slate-soft);
+    margin-bottom:3px;
+  }
+
+  /* ---------- Tabs / TOC ---------- */
+  .tabs{
+    display:flex;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style:none;
+    position: sticky;
+    top:0;
+    background: var(--paper);
+    z-index: 10;
+    border-bottom: 1px solid var(--line);
+  }
+  .tabs li a{
+    display:block;
+    padding: 14px 18px 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing:0.04em;
+    color: var(--slate-soft);
+    text-decoration:none;
+    border-bottom: 3px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .tabs li a:hover{ color: var(--ink); }
+  .tabs li a b{
+    color: var(--brass);
+    font-weight:500;
+    margin-right:6px;
+  }
+
+  /* ---------- Sections ---------- */
+  section.card{
+    margin-top: 54px;
+    scroll-margin-top: 60px;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom: 22px;
+  }
+  .section-num{
+    font-family: var(--font-mono);
+    font-size: 34px;
+    color: var(--paper-2);
+    -webkit-text-stroke: 1.4px var(--brass);
+    color: transparent;
+    line-height:1;
+  }
+  .section-head h2{
+    font-family: var(--font-display);
+    font-weight:500;
+    font-size: 26px;
+    margin:0;
+  }
+  .section-sub{
+    font-size:13.5px;
+    color: var(--slate-soft);
+    margin: -14px 0 24px 50px;
+  }
+
+  .finding{
+    background:#fff;
+    border:1px solid var(--line);
+    border-left: 3px solid var(--brass);
+    border-radius: 3px;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+  }
+  .finding h3{
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin:0 0 8px;
+    color: var(--ink);
+    font-family:var(--font-mono);
+    font-weight:500;
+  }
+  .finding p{ margin: 0 0 10px; font-size:14.5px; color:var(--slate);}
+  .finding p:last-child{margin-bottom:0;}
+
+  .tag{
+    display:inline-block;
+    font-family: var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding: 3px 8px;
+    border-radius: 20px;
+    margin-right:6px;
+  }
+  .tag.neutral{ background: var(--brass-soft); color: var(--brass); }
+  .tag.watch{ background: rgba(156,74,46,0.12); color: var(--warn); }
+
+  ul.checklist{
+    list-style:none;
+    padding:0;
+    margin: 14px 0 0;
+  }
+  ul.checklist li{
+    position:relative;
+    padding: 9px 0 9px 30px;
+    font-size:14.5px;
+    color: var(--slate);
+    border-top: 1px solid var(--line);
+  }
+  ul.checklist li:first-child{ border-top:none; }
+  ul.checklist li::before{
+    content:"";
+    position:absolute;
+    left:0; top:14px;
+    width:9px; height:9px;
+    border: 1.5px solid var(--brass);
+    border-radius:2px;
+  }
+  ul.checklist li b{ color:var(--ink); font-weight:600; }
+
+  /* ---------- Salary table ---------- */
+  .comp-table{
+    width:100%;
+    border-collapse:collapse;
+    margin: 6px 0 8px;
+    font-size:14px;
+  }
+  .comp-table th, .comp-table td{
+    text-align:left;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .comp-table thead th{
+    font-family: var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color: var(--slate-soft);
+    font-weight:500;
+    border-bottom: 1.5px solid var(--ink);
+  }
+  .comp-table td.num{ font-family: var(--font-mono); font-weight:500; color:var(--ink); white-space:nowrap;}
+  .comp-table tr.highlight td{ background: var(--brass-soft); }
+  .comp-table tr.highlight td:first-child{ border-left: 2px solid var(--brass); }
+
+  .source-note{
+    font-size:12px;
+    color: var(--slate-soft);
+    margin-top:10px;
+    font-style:italic;
+  }
+
+  /* ---------- Question blocks ---------- */
+  .q-grid{
+    display:grid;
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .q-item{
+    display:flex;
+    gap:14px;
+    padding: 14px 0;
+    border-top:1px solid var(--line);
+  }
+  .q-item:first-child{ border-top:none; }
+  .q-index{
+    font-family: var(--font-mono);
+    font-size:13px;
+    color: var(--brass);
+    padding-top:2px;
+    flex-shrink:0;
+    width:22px;
+  }
+  .q-item p{ margin:0; font-size:14.5px; color: var(--slate); }
+  .q-item p b{ color: var(--ink); }
+
+  .subhead{
+    font-family: var(--font-mono);
+    font-size:11.5px;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color: var(--brass);
+    margin: 30px 0 4px;
+  }
+
+  .callout{
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: 22px 24px;
+    margin-top: 24px;
+  }
+  .callout h3{
+    font-family: var(--font-display);
+    font-weight:500;
+    font-size:17px;
+    margin: 0 0 8px;
+    color: var(--ml-yellow);
+  }
+  .callout p{ margin:0; font-size:14px; color: rgba(236,234,228,0.88); }
+
+  footer{
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.05em;
+    color: var(--slate-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  @media (max-width:640px){
+    .tabs{ overflow-x:auto; }
+    .section-sub{ margin-left:0; }
+    .cover-eyebrow{ flex-direction:column; gap:12px; }
+    .stamp{ align-self:flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="cover">
+    <div class="cover-eyebrow">
+      <span>Preparación ejecutiva · Uso personal de la candidata</span>
+      <span class="stamp">Confidencial</span>
+    </div>
+    <h1>Dirección de Operaciones<br><em>Mercado Libre</em> — Sureste</h1>
+    <div class="cover-meta">
+      <div><span>Candidata</span>Ing. Ale Herrera</div>
+      <div><span>Etapa</span>Primera entrevista de selección</div>
+      <div><span>Plaza de referencia</span>Mérida, Yucatán · Sureste de México</div>
+      <div><span>Preparado</span>17 de julio, 2026</div>
+    </div>
+  </div>
+
+  <ul class="tabs">
+    <li><a href="#verificacion"><b>01</b>Verificación</a></li>
+    <li><a href="#compensacion"><b>02</b>Benchmark salarial</a></li>
+    <li><a href="#entrevista"><b>03</b>Primera entrevista</a></li>
+  </ul>
+
+  <!-- ============ SECTION 1 ============ -->
+  <section class="card" id="verificacion">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>¿Es real la vacante?</h2>
+    </div>
+    <p class="section-sub">Búsqueda cruzada en LinkedIn Jobs, Computrabajo, Indeed, Jooble, Glassdoor y el portal oficial de empleos de Mercado Libre.</p>
+
+    <div class="finding">
+      <h3>Lo que se encontró</h3>
+      <span class="tag watch">Sin publicación abierta</span>
+      <p>No aparece publicada ninguna vacante de <b>"Dirección de Operaciones"</b> para Mérida ni para el sureste de México en ninguna de las bolsas de trabajo consultadas ni en el sitio oficial de Mercado Libre. Sí hay vacantes activas de la compañía en Mérida — por ejemplo, "Coordinación Primera Milla · Mercado Envíos" — pero ninguna a nivel de Dirección.</p>
+      <p>Esto <b>no es, por sí solo, una señal de alarma</b>. Las posiciones de Dirección casi nunca se publican abiertamente: se manejan por búsqueda directa (executive search / headhunter) o por referido interno — que es, muy probablemente, el canal por el que te contactaron. Mercado Libre además anunció una inversión histórica de 4,600 millones de dólares para México en 2026, con 8,500 contrataciones nuevas concentradas en logística y áreas corporativas, lo cual hace plausible que existan posiciones de dirección regional que aún no salen a bolsa pública.</p>
+    </div>
+
+    <div class="finding">
+      <h3>Checklist de verificación antes de la entrevista</h3>
+      <ul class="checklist">
+        <li><b>Dominio de correo:</b> confirma que la persona que te contactó escribe desde <b>@mercadolibre.com</b> (o el dominio corporativo correspondiente), no desde un correo genérico o con variaciones sospechosas del nombre.</li>
+        <li><b>Perfil de LinkedIn del reclutador:</b> revisa antigüedad real en la empresa, historial de publicaciones y conexiones mutuas coherentes con Talent Acquisition o Recursos Humanos de MELI.</li>
+        <li><b>Número de vacante interno (job req ID):</b> las empresas de este tamaño casi siempre tienen uno, aunque la posición no esté publicada. Pídelo sin pena — es una pregunta normal, no incómoda.</li>
+        <li><b>Cruce con el sitio oficial:</b> revisa <span style="font-family:var(--font-mono)">jobs.mercadolibre.com</span> por si aparece una posición equivalente o de nivel similar en otra plaza del país.</li>
+        <li><b>Cero costos, cero datos sensibles:</b> ningún proceso legítimo de selección te pedirá pagar por "materiales de evaluación", certificaciones, o compartir datos bancarios antes de una oferta formal. Es la señal de alerta número uno de fraude de reclutamiento.</li>
+        <li><b>Red propia:</b> si tienes contactos, aunque sean de segundo grado, dentro de Mercado Libre o su ecosistema logístico en el sureste, una validación informal en 5 minutos vale más que cualquier búsqueda en Google.</li>
+      </ul>
+    </div>
+
+    <div class="finding">
+      <h3>Alcance probable del puesto, visto desde tu trayectoria</h3>
+      <p>Vienes de <b>Tenaris</b> (manufactura pesada, tubería de acero para energía) y antes de <b>Grupo Modelo</b> (manufactura y distribución masiva de consumo), con formación en <b>Ingeniería en Mecatrónica</b>. Es un perfil de planta, automatización y disciplina de proceso — no de logística de última milla ni de e-commerce puro. Vale la pena confirmar temprano si el puesto es de <b>operación de red logística / última milla</b> (más cercano a lo que hace Mercado Envíos) o si tiene un componente más industrial (centros de distribución, automatización de almacén, mantenimiento de infraestructura) — ahí tu experiencia pesa mucho más de forma directa.</p>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2 ============ -->
+  <section class="card" id="compensacion">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Benchmark salarial</h2>
+    </div>
+    <p class="section-sub">Rango de mercado para roles de Dirección de Operaciones en México, cruzando datos de bolsas de trabajo masivas y estudios de consultoría ejecutiva.</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>Fuente / segmento</th><th>Rango mensual bruto</th><th>Nota</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mercado general (Computrabajo / Talent.com / Glassdoor)</td>
+          <td class="num">$55,000 – $110,000 MXN</td>
+          <td>Agrega empresas de todos los tamaños y sectores; es el piso más confiable, no el techo.</td>
+        </tr>
+        <tr class="highlight">
+          <td>Dirección/Gerencia senior en manufactura e industria pesada (perfil comparable a Tenaris / Grupo Modelo)</td>
+          <td class="num">$110,000 – $180,000 MXN</td>
+          <td>Rango observado en datos sectoriales de manufactura; este es el punto de comparación más realista con su trayectoria actual.</td>
+        </tr>
+        <tr>
+          <td>Empresas grandes / multinacionales (facturación &gt;$250M USD)</td>
+          <td class="num">$200,000 – $280,000 MXN</td>
+          <td>Cifra de estudios de consultoría ejecutiva (Page Group) para el tramo alto de Dirección de Operaciones; tomarla como techo optimista, no como expectativa base.</td>
+        </tr>
+        <tr>
+          <td>Ajuste regional (CDMX/Monterrey vs. sureste)</td>
+          <td class="num">−5% a −15%</td>
+          <td>Diferencial reportado para roles gerenciales fuera de CDMX/Monterrey; en compañías públicas con bandas nacionales puede ser menor, pero no asumirlo.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="source-note">Fuentes: Paylab, Computrabajo, Talent.com, Glassdoor México, Data México (Directores y Gerentes en Producción Manufacturera), estudio Page Group vía El CEO (2023), Reporte de Sueldos Directivos Levu Executives (2025). Las cifras públicas de sueldo para roles de Dirección son escasas y dispersas — trátalas como referencia orientativa, no como dato exacto.</p>
+
+    <div class="callout">
+      <h3>Lectura conservadora para tu negociación</h3>
+      <p>Con un punto de partida en Tenaris — industria pesada, tabuladores más conservadores que el sector tecnológico/retail — un salto a Mercado Libre probablemente representa una mejora, pero no asumas la banda alta de la industria de e-commerce. Un rango razonable y conservador para anclar tu propia expectativa: <b>$130,000 – $220,000 MXN mensuales base</b>, con bono variable moderado (10–25%) y beneficios estándar de empresa pública. Cualquier cifra por arriba de eso es una sorpresa positiva, no el punto de partida. No propongas número en la primera entrevista: pregunta primero por la estructura completa (fijo, variable, beneficios, y si aplica algún componente en acciones).</p>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3 ============ -->
+  <section class="card" id="entrevista">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Preparación para la primera entrevista</h2>
+    </div>
+    <p class="section-sub">Contexto de la empresa, preguntas que probablemente te hagan, y preguntas que tú debes hacer.</p>
+
+    <div class="finding">
+      <h3>Contexto que debes tener listo</h3>
+      <p>Mercado Libre anunció una inversión de <b>US$4,600 millones para México en 2026</b> (35% más que en 2025), con <b>8,500 nuevas contrataciones</b> concentradas en logística y áreas corporativas, superando los 42,000 empleados en el país. El sureste — con Mérida como nodo relevante de última milla — es parte activa de esa expansión. Mencionar esto con naturalidad, no como dato memorizado, muestra que ya llegaste haciendo tarea.</p>
+      <p>El negocio corre sobre dos motores: <b>e-commerce</b> (Marketplace, Envíos, Ads) y <b>fintech</b> (Mercado Pago, Mercado Crédito). Una Dirección de Operaciones probablemente se conecta con ambos — vale la pena no asumir que el rol es "solo logística".</p>
+    </div>
+
+    <div class="subhead">Preguntas que probablemente te hagan</div>
+    <div class="q-grid">
+      <div class="q-item"><span class="q-index">01</span><p><b>Vienes de manufactura industrial (Tenaris, Grupo Modelo) — ¿por qué operaciones de e-commerce/logística y por qué ahora?</b> Prepárala como respuesta directa, no defensiva.</p></div>
+      <div class="q-item"><span class="q-index">02</span><p><b>Cuéntame de una vez que escalaste una operación rápidamente</b> sin sacrificar calidad o nivel de servicio — puede venir de planta, no tiene que ser de última milla.</p></div>
+      <div class="q-item"><span class="q-index">03</span><p><b>¿Cómo tomas decisiones operativas con datos incompletos o contradictorios?</b> Da un ejemplo concreto.</p></div>
+      <div class="q-item"><span class="q-index">04</span><p><b>¿Cómo coordinas con áreas fuera de tu control directo</b> (tecnología, finanzas, comercial) para lograr un objetivo operativo?</p></div>
+      <div class="q-item"><span class="q-index">05</span><p>Describe una <b>decisión difícil bajo presión de tiempo o costo</b> y cómo la sostuviste ante tu equipo.</p></div>
+      <div class="q-item"><span class="q-index">06</span><p><b>¿Cómo lideras equipos grandes y geográficamente dispersos?</b> ¿Qué mecanismos usas para mantener consistencia — pregunta natural viniendo de operación de planta/turnos.</p></div>
+      <div class="q-item"><span class="q-index">07</span><p>Un proceso que funcionaba <b>deja de ser eficiente al triplicarse el volumen</b>. ¿Qué haces primero?</p></div>
+      <div class="q-item"><span class="q-index">08</span><p><b>¿Qué sabes de automatización o mejora de procesos que podrías aportar</b> a una operación de volumen alto como la nuestra? — aquí tu formación en mecatrónica es una ventaja real, no un dato de más.</p></div>
+    </div>
+    <p style="font-size:13px;color:var(--slate-soft);margin-top:8px;">Prepara cada respuesta en formato STAR (Situación · Tarea · Acción · Resultado) con al menos un número concreto — % de mejora, tiempo reducido, volumen gestionado, plantas o líneas a cargo. Tu paso por Tenaris y Grupo Modelo aporta algo que muchos candidatos de e-commerce no tienen: disciplina de proceso industrial, manejo de sindicatos/turnos, y una base técnica (mecatrónica) que conecta directamente con automatización de centros de distribución — nómbralo como ventaja, no lo minimices.</p>
+
+    <div class="subhead">Preguntas que tú debes hacer</div>
+    <div class="q-grid">
+      <div class="q-item"><span class="q-index">01</span><p>¿Cuál es el <b>alcance real</b> de esta Dirección — país completo, región sureste, o una unidad de negocio específica (Envíos, Marketplace, Fintech)?</p></div>
+      <div class="q-item"><span class="q-index">02</span><p>¿El rol es más de <b>red logística / última milla</b>, o tiene un componente de <b>centros de distribución y automatización</b> más cercano a mi experiencia de planta?</p></div>
+      <div class="q-item"><span class="q-index">03</span><p>¿A quién reporta la posición y <b>qué tamaño y ubicación tiene el equipo</b> a su cargo?</p></div>
+      <div class="q-item"><span class="q-index">04</span><p>¿Cuáles son <b>los 2–3 retos operativos principales</b> que enfrenta esta área hoy?</p></div>
+      <div class="q-item"><span class="q-index">05</span><p>¿Cómo se <b>mide el éxito</b> en los primeros 6 y 12 meses del rol?</p></div>
+      <div class="q-item"><span class="q-index">06</span><p>¿Por qué está abierta esta posición — <b>crecimiento, sustitución o reestructura</b>?</p></div>
+      <div class="q-item"><span class="q-index">07</span><p>¿Cómo está estructurada la <b>compensación variable</b> y a qué KPIs operativos está ligada?</p></div>
+    </div>
+
+    <div class="callout">
+      <h3>Antes de colgar la llamada</h3>
+      <p>Confirma formato (video o presencial), nombre y rol de quien te entrevista, y siguiente paso del proceso. Cierra pidiendo un correo de seguimiento — es una práctica normal en procesos ejecutivos serios y, de paso, te da otra pieza de evidencia sobre la legitimidad del proceso.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Sureste de México · Mérida, Yuc.</span>
+  </footer>
+
+</div>
+</body>
+</html>
